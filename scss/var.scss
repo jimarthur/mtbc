@@ -1,0 +1,11 @@
+$font-stack: "Helvetica Neue", Helvetica, Arial, sans-serif;
+$primary-color: #333;
+$link-color: #0000ff;
+body {
+  font-family: $font-stack;
+  color: $primary-color;
+}
+
+a{
+  color: $link-color;
+}
