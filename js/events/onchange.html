@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>onChange()</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  </head>
+  <body>
+
+    <form>
+      <select id="options">
+        <option>--Pick an Option--</option>
+        <option value="a">A</option>
+        <option value="b">B</option>
+        <option value="c">C</option>
+      </select>
+    </form>
+
+    <div>The value is <strong id="demo"></strong></div>
+
+    <script>
+      function setValue(element) {
+         let option = document.getElementById(el1).value;
+         document.getElementById(el2).innerHTML = option;
+      }
+      // Function to add event listener to button#time
+      var list = document.getElementById("options");
+      list.addEventListener("change", ()=>{setValue('options','demo')};
+    </script>
+  </body>
+</html>

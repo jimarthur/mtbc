@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+  <head>
+      <title>Using the development console.</title>
+  </head>
+  <body>
+    <div id="myText">Hello World</div>
+
+  <script>
+    var content = document.getElementById('myText').innerHTML;
+    var div = '<div style="color: red;">It is a nice day.</div>';
+    var msg = content + div;
+    document.getElementById('myText').innerHTML = msg;
+
+    </script>
+</html>
