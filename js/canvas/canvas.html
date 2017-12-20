@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+       <meta charset="UTF-8">
+       <title>Canvas Intro</title>
+       <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+
+      <canvas id="canvas" height="400px" width="600px" style="border: 1 px solid #000";>></canvas>
+
+      <script>
+
+      var x = Math.random() * 500;
+
+      var y = Math.random() * 300;
+
+      var canvas = document.getElementById('canvas');
+      var ctx = canvas.getContext('2d');
+
+      ctx.fillStyle = '#' + Math.floor(Math.random()*16777215).toString(16);
+      ctx.fillRect(10, 10, 100, 100);
+
+      ctx.fillStyle = '#' + Math.floor(Math.random()*16777215).toString(16);
+      ctx.fillRect(x, y, 100, 100);
+
+      ctx.beginPath();
+      ctx.strokeStyle = '#' + Math.floor(Math.random()*16777215).toString(16);
+      ctx.arc(230, 200, 83, 0, 2 * Math.PI);
+      ctx.stroke();
+
+        //Plot a random x
+        //var x = Math.random() * 700;
+
+        //Plot a random y
+        //var y = Math.random() * 500;
+
+        //Initialize the canvas
+        //var canvas = document.getElementById('canvas');
+
+        //create a context
+        //var ctx = canvas.getContext('2d');
+
+        //Create a random color
+        //ctx.fillStyle = '#' + Math.floor(Math.random()*16777215).toString(16);
+
+        //Create the rectangle
+      //  ctx.fillRect(x, y, 100, 100);
+
+      </script>
+    </body>
+</html>
