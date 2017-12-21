@@ -19,7 +19,7 @@ main {
 nav ul {
   list-style-type: none;
   padding: 0;
-  margin: 0;
+  margin: 0 1rem;
 }
 
 nav ul li {
@@ -37,4 +37,9 @@ nav ul li button {
 
 nav ul li button {
   width: 100%;
+}
+
+nab ul li span{
+  height: 2rem;
+  line-height: 2rem;
 }
