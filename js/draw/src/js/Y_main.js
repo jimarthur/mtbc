@@ -55,30 +55,18 @@ setShape(shp) {
     document.getElementById('trackY').innerHTML = 'Y: ' + y;
     },
 
-    drawRect: function(){
+    drawRect: function(x,y,h,w){
       ctx.fillStyle = '#'+ Math.floor(Math.random()*16777215).toString(16);
       ctx.fillRect(x1, y1, (x2-x1), (y2-y1));
     },
 
-drawLine: function() {
-  ctx.strokeStyle = '#' + Math.floor(Math.random()*16777215).toString(16);
-  ctx.beginPath();
-  ctx.moveTo(x1,y1);
-  ctx.lineTo(x2,y2);
-  ctx.stroke();
-},
-
 //Draws a selected shape
 draw: function() {
-  ctx.restore();
   if(shape==='rectangle'){
     this.drawRect();
-  }else if(shape==='line'){
-      this.drawLine();
-    }else{
+  }else{
     alert('Please choose a shape');
   }
-  ctx.save();
 },
     getCanvas: function(){
       return canvas;
@@ -98,13 +86,8 @@ draw: function() {
 draw.init();
 
 //Choose to draw a rectangle
-  document.getElementById('btnRect').addEventListener('click', function(){
+  document.getElementById('btnRect').addEventListener('click', function(evt){
   draw.setShape('rectangle');
-});
-
-//Choose to draw a line
-  document.getElementById('btnLine').addEventListener('click', function(){
-  draw.setShape('line');
 });
 
 //Track the x,y postion
