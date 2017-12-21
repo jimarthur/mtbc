@@ -23,11 +23,38 @@ y1=0,
 //ending x,y coords
 x2=0,
 y2=0,
+
+//third point for triangle coords
+x3=0,
+y3=0,
+
+//previous x,y coords
+lx=0,
+ly=0,
+
+
 //what shape we are drawing
-shape='';
+shape='',
+
+//have we started drawing YeoyyrtisDrawing=false;
+isDrawing=false;
 
 //private data is above return
-  return{
+return{
+
+setIsDrawing: function(bool) {
+  isDrawing = bool;
+},
+
+getIsDrawing: function() {
+  return isDrawing;
+},
+
+
+getShape: function() {
+  return shape;
+
+},
 
 //return a random color
 randColor: function() {
@@ -41,8 +68,14 @@ setShape(shp) {
 },
 //Set the x,y coords
     setXY: function(evt) {
+//Set tht previous coords
+      lx = x;
+      ly = y;
+
       x = (evt.clientX - rect.left) - canvas.offsetLeft;
       y = (evt.clientY - rect.top);
+
+      console.log({'x':x, 'y':y, 'lx': lx, 'ly':ly});
     },
 
     setStart: function() {
@@ -54,6 +87,8 @@ setShape(shp) {
       x2=x;
       y2=y;
     },
+
+
 
     //Write the cords back to the UI
     writeXY: function(){
@@ -68,27 +103,46 @@ setShape(shp) {
       ctx.strokeRect(x1, y1, (x2-x1), (y2-y1));
     },
 
-drawLine: function() {
-  ctx.strokeStyle = this.randColor();
-  ctx.beginPath();
-  ctx.moveTo(x1,y1);
-  ctx.lineTo(x2,y2);
-  ctx.stroke();
-},
+    drawLine: function() {
+      ctx.strokeStyle = this.randColor();
+      ctx.beginPath();
+      ctx.moveTo(x1,y1);
+      ctx.lineTo(x2,y2);
+      ctx.stroke();
+    },
 
-drawCircle: function() {
-  ctx.fillStyle = this.randColor();
-  ctx.strokeStyle = this.randColor();
+    drawCircle: function() {
+      ctx.fillStyle = this.randColor();
+      ctx.strokeStyle = this.randColor();
 
-  let a = (x1-x2);
-  let b = (y1-y2);
-  let radius = Math.sqrt(a*a + b*b);
+      let a = (x1-x2);
+      let b = (y1-y2);
+      let radius = Math.sqrt(a*a + b*b);
 
-  ctx.beginPath();
-  ctx.arc(x1, y1, radius, 0, 2 * Math.PI);
-  ctx.fill();
-  ctx.stroke();
-},
+      ctx.beginPath();
+      ctx.arc(x1, y1, radius, 0, 2 * Math.PI);
+      ctx.fill();
+      ctx.stroke();
+    },
+
+    drawPath: function() {
+      ctx.strokeStyle = this.randColor();
+      ctx.beginPath();
+      ctx.moveTo(lx, ly);
+      ctx.lineTo(x,y);
+      ctx.stroke();
+    },
+
+    //Draw a triangle
+    drawTriangle: function() {
+      ctx.strokeStyle = this.randColor();
+      ctx.beginPath();
+      ctx.moveTo(x1, y1);
+      ctx.lineTo(x2, y2);
+      ctx.lineTo(x3, y3);
+      ctx.closePath();
+      ctx.stroke();
+    },
 
 //Draws a selected shape
 draw: function() {
@@ -99,7 +153,12 @@ draw: function() {
       this.drawLine();
     }else if(shape==='circle'){
         this.drawCircle();
-      }else{
+      }else if(shape==='path'){
+            this.drawPath();
+          }else if(shape==='triangle'){
+                this.drawTriangle();
+          }
+      else{
     alert('Please choose a shape');
   }
   ctx.save();
@@ -136,18 +195,37 @@ draw.init();
   draw.setShape('circle');
 });
 
+//Choose to draw a path
+  document.getElementById('btnPath').addEventListener('click', function(){
+  draw.setShape('path');
+});
+
+//Choose to draw a triangle
+  document.getElementById('btnTriangle').addEventListener('click', function(){
+  draw.setShape('triangle');
+});
+
 //Track the x,y postion
 draw.getCanvas().addEventListener('mousemove', function(evt){
   draw.setXY(evt);
   draw.writeXY();
+
+  if(draw.getShape()==='path' && draw.getIsDrawing()===true){
+    draw.draw();
+  };
+
+
 });
+
 draw.getCanvas().addEventListener('mousedown', function(){
   draw.setStart();
+  draw.setIsDrawing(true);
 });
 
 draw.getCanvas().addEventListener('mouseup', function(){
   draw.setEnd();
   draw.draw();
+  draw.setIsDrawing(false);
 });
 
 //Get the height and width of the main element we will use this set canvas to the full
